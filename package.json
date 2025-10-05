@@ -1,0 +1,26 @@
+{
+    "name": "discord-wiki-bot",
+    "version": "1.2.6",
+    "description": "A Discord bot for serving RPG Wiki Data",
+    "main": "./src/main.js",
+    "scripts": {
+        "start": "node ./src/main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/FrancisStudios/discord-wiki-bot"
+    },
+    "author": "FrancisStudios",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/FrancisStudios/discord-wiki-bot"
+    },
+    "homepage": "https://github.com/FrancisStudios/discord-wiki-bot#readme",
+    "dependencies": {
+        "discord-api-types": "^0.37.52",
+        "discord.js": "^14.12.1",
+        "dotenv": "^16.3.1",
+        "node-fetch": "^3.3.2"
+    },
+    "type": "module"
+}
