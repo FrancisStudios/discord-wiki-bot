@@ -7,6 +7,7 @@
 
 import { Client, GatewayIntentBits } from 'discord.js';
 import { config } from 'dotenv';
+import { DISCORD_EVENTS } from './ENUM.js';
 
 /* Bot Intents And Permissions Section Should be Here */
 const _botClientIntents = {
@@ -27,6 +28,10 @@ DiscordBotClient.login(process.env.DISCORD_WIKI_BOT_API_KEY);
 
 
 /* Control Flow And Program Blueprint Should Live Over Here */
-DiscordBotClient.on('messageCreate', (msg) => {
+DiscordBotClient.on(DISCORD_EVENTS.CLIENT_READY, (_readyState) => {
+    console.log('cl');
+});
+
+DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (msg) => {
 
 });
