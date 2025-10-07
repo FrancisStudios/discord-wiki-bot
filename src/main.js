@@ -44,8 +44,8 @@ DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
         console.log('Help keyword recognized')
         DiscordBotFileReader.read('help')
             .then((resp) => {
-                console.log(resp);
-                //message.reply(resp);
+                console.log('promise resp', resp);
+                message.reply(resp);
             })
             .catch((error) => {
                 console.log(error);
