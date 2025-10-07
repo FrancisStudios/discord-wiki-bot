@@ -10,6 +10,16 @@ const DISCORD_EVENTS = {
     CLIENT_READY: 'clientReady'
 }
 
+const SUPPORTED_ENCODINGS = {
+    UTF8: 'utf8'
+}
+
+const EXTENSIONS = {
+    MAN: '.man.md'
+}
+
 export {
     DISCORD_EVENTS,
+    SUPPORTED_ENCODINGS,
+    EXTENSIONS
 }

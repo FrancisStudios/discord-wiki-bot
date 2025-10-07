@@ -9,6 +9,7 @@ import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { config } from 'dotenv';
 import { DISCORD_EVENTS } from './ENUM.js';
 import { LOG_MESSAGES, PREFIXES } from './CONSTANTS.js';
+import DiscordBotFileReader from './utils/file-reader.util.js';
 
 /* Bot Intents And Permissions Section Should be Here */
 const _botClientIntents = {
@@ -38,6 +39,9 @@ DiscordBotClient.on(DISCORD_EVENTS.CLIENT_READY, (_readyState) => {
 DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
     if (message.content == 'hello')
         message.reply('world');
+
+    if(message.content == '?help')
+        DiscordBotFileReader.read('help').then((resp)=> {console.log(resp)});
 
 
     console.log(message.content)
