@@ -40,15 +40,17 @@ DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
     if (message.content == 'hello')
         message.reply('world');
 
-    if (message.content == 'help') {
-        console.log('Help keyword recognized')
-        DiscordBotFileReader.read('help')
-            .then((resp) => {
-                console.log('promise resp', resp);
-                message.reply(resp);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    switch (message.content) {
+
+        case /^[?]help *$/.test(message.content) ? message.content : false :
+            DiscordBotFileReader.read('help')
+                .then((resp) => {
+                    message.reply(resp);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            break;
+
     }
 });
