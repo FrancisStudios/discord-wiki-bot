@@ -15,7 +15,7 @@ With these you can **search, create, edit, remove, order, sort** your and other 
 
 Duegev Wiki Discord Bot (DUEGEVBOT) is written by `Francis Studios Software` in 2025 and is maintained by the afore mentioned party. This software product and all intellectual property belongs to **Dynar Free People's Protectorate**.
 
-[🤖 github source code](https://github.com/FrancisStudios/discord-wiki-bot)
+https://github.com/FrancisStudios/discord-wiki-bot
 
 ### 🤖 Duegev Wiki Discord Bot
 
