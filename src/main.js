@@ -8,7 +8,7 @@
 import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { config } from 'dotenv';
 import { DISCORD_EVENTS } from './ENUM.js';
-import { LOG_MESSAGES, PREFIXES } from './CONSTANTS.js';
+import { GENERIC_RESPONSE_MESSAGES, LOG_MESSAGES, PREFIXES } from './CONSTANTS.js';
 import DiscordBotFileReader from './utils/file-reader.util.js';
 
 /* Bot Intents And Permissions Section Should be Here */
@@ -37,12 +37,14 @@ DiscordBotClient.on(DISCORD_EVENTS.CLIENT_READY, (_readyState) => {
 });
 
 DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
-    if (message.content == 'hello')
-        message.reply('world');
 
     switch (message.content) {
 
-        case /^[?]help *$/.test(message.content) ? message.content : false :
+        case /^[?]hello$/.test(message.content) ? message.content : false:
+            message.reply(GENERIC_RESPONSE_MESSAGES.TEST_RESPONSE);
+            break;
+
+        case /^[?]help *$/.test(message.content) ? message.content : false:
             DiscordBotFileReader.read('help')
                 .then((resp) => {
                     message.reply(resp);
@@ -52,5 +54,17 @@ DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
                 });
             break;
 
+        default:
+            if (/^[?][A-Za-z0-9] */.test(message.content)) {
+                message
+                    .reply(GENERIC_RESPONSE_MESSAGES.COMMAND_NOT_RECOGNIZED);
+
+                console
+                    .log(
+                        PREFIXES.LOG_PREFIX,
+                        LOG_MESSAGES.CMD_INVALID
+                    )
+            }
+            break;
     }
 });
