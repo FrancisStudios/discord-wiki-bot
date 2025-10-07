@@ -23,12 +23,10 @@ export default class DiscordBotFileReader {
 
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, SUPPORTED_ENCODINGS.UTF8, (error, data) => {
-                if (error)
-                    console.log(error)
-                    //reject(error)
-
-                resolve(data);
+                error
+                    ? reject(error)
+                    : resolve(data);
             });
-        })
+        });
     }
 }
