@@ -10,6 +10,7 @@ import { config } from 'dotenv';
 import { DISCORD_EVENTS } from './ENUM.js';
 import { GENERIC_RESPONSE_MESSAGES, LOG_MESSAGES, PREFIXES } from './CONSTANTS.js';
 import DiscordBotFileReader from './utils/file-reader.util.js';
+import DiscordWikiBotCommandRegistry from './com/REGISTRY.js';
 
 /* Bot Intents And Permissions Section Should be Here */
 const _botClientIntents = {
@@ -44,14 +45,10 @@ DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
             message.reply(GENERIC_RESPONSE_MESSAGES.TEST_RESPONSE);
             break;
 
-        case /^[?]help *$/.test(message.content) ? message.content : false:
-            DiscordBotFileReader.read('help')
-                .then((resp) => {
-                    message.reply(resp);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+        case DiscordWikiBotCommandRegistry.help.expression(message.content):
+            DiscordWikiBotCommandRegistry
+                .help
+                .dispatch(message);
             break;
 
         default:
