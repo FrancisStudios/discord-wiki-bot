@@ -8,6 +8,12 @@
 import HelloCommand from "./cmdlet/hello.js";
 import HelpCommand from "./cmdlet/help.js";
 
+
+/**
+ * This is where to register new command expressions and
+ * bind the command definitions which should be located in
+ * /cmdlet/<cmd_name>Command.js file (just good practice)
+ */
 export default class DiscordWikiBotCommandRegistry {
 
     static help = {
