@@ -40,9 +40,11 @@ DiscordBotClient.on(DISCORD_EVENTS.CLIENT_READY, (_readyState) => {
 DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
 
     switch (message.content) {
-
-        case /^[?]hello$/.test(message.content) ? message.content : false:
-            message.reply(GENERIC_RESPONSE_MESSAGES.TEST_RESPONSE);
+        
+        case DiscordWikiBotCommandRegistry.hello.expression(message.content):
+            DiscordWikiBotCommandRegistry
+                .hello
+                .dispatch(message);
             break;
 
         case DiscordWikiBotCommandRegistry.help.expression(message.content):
