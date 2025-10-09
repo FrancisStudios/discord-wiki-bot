@@ -40,7 +40,7 @@ DiscordBotClient.on(DISCORD_EVENTS.CLIENT_READY, (_readyState) => {
 DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
 
     switch (message.content) {
-        
+
         case DiscordWikiBotCommandRegistry.hello.expression(message.content):
             DiscordWikiBotCommandRegistry
                 .hello
@@ -50,6 +50,12 @@ DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
         case DiscordWikiBotCommandRegistry.help.expression(message.content):
             DiscordWikiBotCommandRegistry
                 .help
+                .dispatch(message);
+            break;
+
+        case DiscordWikiBotCommandRegistry.ls.expression(message.content):
+            DiscordWikiBotCommandRegistry
+                .ls
                 .dispatch(message);
             break;
 

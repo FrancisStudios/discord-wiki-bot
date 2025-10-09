@@ -7,6 +7,7 @@
 
 import HelloCommand from "./cmdlet/hello.js";
 import HelpCommand from "./cmdlet/help.js";
+import LSCommand from "./cmdlet/ls.js";
 
 
 /**
@@ -24,6 +25,11 @@ export default class DiscordWikiBotCommandRegistry {
     static hello = {
         expression: (_keyword) => /^[?]hello$/.test(_keyword) ? _keyword : false,
         dispatch: (_messageRef) => { HelloCommand(_messageRef) }
+    }
+
+    static ls = {
+        expression: (_keyword) => /^[?]ls *$/.test(_keyword) ? _keyword : false,
+        dispatch: (_messageRef) => { LSCommand(_messageRef) }
     }
 
 }
