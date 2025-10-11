@@ -9,7 +9,6 @@ import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { config } from 'dotenv';
 import { DISCORD_EVENTS } from './ENUM.js';
 import { GENERIC_RESPONSE_MESSAGES, LOG_MESSAGES, PREFIXES } from './CONSTANTS.js';
-import DiscordBotFileReader from './utils/file-reader.util.js';
 import DiscordWikiBotCommandRegistry from './com/REGISTRY.js';
 
 /* Bot Intents And Permissions Section Should be Here */
@@ -40,19 +39,21 @@ DiscordBotClient.on(DISCORD_EVENTS.CLIENT_READY, (_readyState) => {
 DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
 
     switch (message.content) {
-
+        /* Test Expression ?hello */
         case DiscordWikiBotCommandRegistry.hello.expression(message.content):
             DiscordWikiBotCommandRegistry
                 .hello
                 .dispatch(message);
             break;
 
+        /* Generic help manual ?help */
         case DiscordWikiBotCommandRegistry.help.expression(message.content):
             DiscordWikiBotCommandRegistry
                 .help
                 .dispatch(message);
             break;
 
+        /* List Command ?ls */
         case DiscordWikiBotCommandRegistry.ls.expression(message.content):
             DiscordWikiBotCommandRegistry
                 .ls
