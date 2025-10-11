@@ -34,7 +34,7 @@ export default class DiscordWikiBotCommandRegistry {
     }
 
     static register = {
-        expression: (_keyword) => /^[?]register *$/.test(_keyword) ? _keyword : false,
+        expression: (_keyword) => /^[?]register */.test(_keyword) ? _keyword : false,
         dispatch: (_messageRef) => { RegisterCommand(_messageRef) }
     }
 

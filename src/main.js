@@ -10,6 +10,7 @@ import { config } from 'dotenv';
 import { DISCORD_EVENTS } from './ENUM.js';
 import { GENERIC_RESPONSE_MESSAGES, LOG_MESSAGES, PREFIXES } from './CONSTANTS.js';
 import DiscordWikiBotCommandRegistry from './com/REGISTRY.js';
+import DiscordWikiBotLogger from './log/log.js';
 
 /* Bot Intents And Permissions Section Should be Here */
 const _botClientIntents = {
@@ -33,7 +34,7 @@ DiscordBotClient.login(process.env.DISCORD_WIKI_BOT_API_KEY);
 
 /* Control Flow And Program Blueprint Should Live Over Here */
 DiscordBotClient.on(DISCORD_EVENTS.CLIENT_READY, (_readyState) => {
-    console.log(PREFIXES.LOG_PREFIX, LOG_MESSAGES.CLIENT_READY);
+    DiscordWikiBotLogger.log(LOG_MESSAGES.CLIENT_READY);
 });
 
 DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
@@ -72,11 +73,7 @@ DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
                 message
                     .reply(GENERIC_RESPONSE_MESSAGES.COMMAND_NOT_RECOGNIZED);
 
-                console
-                    .log(
-                        PREFIXES.LOG_PREFIX,
-                        LOG_MESSAGES.CMD_INVALID
-                    )
+                DiscordWikiBotLogger.log(LOG_MESSAGES.CMD_INVALID);
             }
             break;
     }
