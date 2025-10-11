@@ -1,0 +1,24 @@
+version: '3'
+services:
+# MongoDB Service
+  mongo:
+    image: mongo:7.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: mongopassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodata:/data/db
+    networks: 
+      unicumnet: 
+        ipv4_address: 172.20.0.45
+
+# Volumes / Networks setup
+volumes:
+  mongodata:
+    driver: local
+networks:
+  unicumnet:
+    name: opt_unicumnet
+    external: true
