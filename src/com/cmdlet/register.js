@@ -6,7 +6,7 @@
 */
 
 const RegisterCommand = (message) => {
-
+    console.log('register')
 }
 
 export default RegisterCommand;
