@@ -5,7 +5,12 @@
  * ©2025 Francis Studios Softwares by L.
 */
 
+import DiscordWikiBotMongoDBClient from "../../db/db.js";
+
 const RegisterCommand = (message) => {
+
+    const DBClient = DiscordWikiBotMongoDBClient.getInstance();
+
     const messageTokens = message
         .content
         .split(' ');
@@ -16,6 +21,15 @@ const RegisterCommand = (message) => {
 
 
     console.log('register', userPeronalityIdentifierToken);
+
+    if (userPeronalityIdentifierToken)
+        DBClient
+            .getUserAuthenticationToken(userPeronalityIdentifierToken)
+            .then(
+                (r) => {
+                    console.log(r);
+                }
+            );
 }
 
 export default RegisterCommand;

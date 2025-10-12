@@ -1,0 +1,7 @@
+{
+    "URI": "mongodb://mongoadmin:mongopassword@172.20.0.45:27017/",
+    "DB_NAME": "discord-wiki-bot",
+    "COLLECTIONS": {
+        "USERS": "users"
+    }
+}
