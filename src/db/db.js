@@ -19,7 +19,6 @@ export default class DiscordWikiBotMongoDBClient {
     }
 
     constructor() {
-        this.client = new MongoClient(DB_CONFIG.URI);
     }
 
     getUserAuthenticationToken = async (_userID2Query) => {
@@ -29,6 +28,7 @@ export default class DiscordWikiBotMongoDBClient {
                 let result;
 
                 try {
+                    this.client = new MongoClient(DB_CONFIG.URI);
                     const db = this.client.db(DB_CONFIG.DB_NAME);
                     const users = db.collection(DB_CONFIG.COLLECTIONS.USERS);
                     const userTokenQuery = { uid: _userID2Query };

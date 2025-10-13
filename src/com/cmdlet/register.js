@@ -5,7 +5,10 @@
  * ©2025 Francis Studios Softwares by L.
 */
 
+import { GENERIC_RESPONSE_MESSAGES, LOG_MESSAGES } from "../../CONSTANTS.js";
 import DiscordWikiBotMongoDBClient from "../../db/db.js";
+import { IDENTIFIERS } from "../../ENUM.js";
+import DiscordWikiBotLogger from "../../log/log.js";
 
 const RegisterCommand = (message) => {
 
@@ -19,17 +22,28 @@ const RegisterCommand = (message) => {
         ? messageTokens[1]
         : false;
 
-
-    console.log('register', userPeronalityIdentifierToken);
-
     if (userPeronalityIdentifierToken)
         DBClient
             .getUserAuthenticationToken(userPeronalityIdentifierToken)
             .then(
                 (r) => {
-                    console.log(r);
+                    if (r && r[IDENTIFIERS.DISCORD_ID] == '') {
+                        message.reply('good');
+                    } else handleInvalidIDErrorCases(r, message, userPeronalityIdentifierToken);
                 }
             );
+}
+
+const handleInvalidIDErrorCases = (r, message, userPeronalityIdentifierToken) => {
+    DiscordWikiBotLogger
+        .log(`${LOG_MESSAGES.USER_IDENTIFIER_INVALID} ${userPeronalityIdentifierToken}`);
+
+    if (r && r[IDENTIFIERS.DISCORD_ID] != '')
+        message
+            .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_IS_ALREADY_IN_USE)
+    else
+        message
+            .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_INVALID)
 }
 
 export default RegisterCommand;

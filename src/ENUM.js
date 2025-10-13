@@ -14,6 +14,10 @@ const SUPPORTED_ENCODINGS = {
     UTF8: 'utf8'
 }
 
+const IDENTIFIERS = {
+    DISCORD_ID: 'discord-id'
+}
+
 const EXTENSIONS = {
     MAN: '.man.md'
 }
@@ -21,5 +25,6 @@ const EXTENSIONS = {
 export {
     DISCORD_EVENTS,
     SUPPORTED_ENCODINGS,
+    IDENTIFIERS,
     EXTENSIONS
 }
