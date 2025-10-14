@@ -28,7 +28,13 @@ const RegisterCommand = (message) => {
             .then(
                 (r) => {
                     if (r && r[IDENTIFIERS.DISCORD_ID] == '') {
-                        message.reply('good');
+
+                        DiscordWikiBotLogger
+                            .log(`${LOG_MESSAGES.USER_IDENTIFIER_ACCEPTED} ${userPeronalityIdentifierToken} for uid: {uid}`);
+
+                        message
+                            .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_ACCEPTED);
+
                     } else handleInvalidIDErrorCases(r, message, userPeronalityIdentifierToken);
                 }
             );
