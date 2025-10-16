@@ -27,18 +27,21 @@ const RegisterCommand = (message) => {
             .getUserAuthenticationToken(userPeronalityIdentifierToken)
             .then(
                 (r) => {
-                    if (r && r[IDENTIFIERS.DISCORD_ID] == '') {
-
-                        DiscordWikiBotLogger
-                            .log(`${LOG_MESSAGES.USER_IDENTIFIER_ACCEPTED} ${userPeronalityIdentifierToken} for uid: {uid}`);
-
-                        message
-                            .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_ACCEPTED);
-
-                    } else handleInvalidIDErrorCases(r, message, userPeronalityIdentifierToken);
+                    (r && r[IDENTIFIERS.DISCORD_ID] == '')
+                        ? handleValidIDNormalCase(r, message, userPeronalityIdentifierToken)
+                        : handleInvalidIDErrorCases(r, message, userPeronalityIdentifierToken);
                 }
             )
             .catch((_rejection) => { });
+}
+
+/** Handle VALID and INVALID cases - so it is not so bloated in the ctrl flow */
+const handleValidIDNormalCase = (r, message, userPeronalityIdentifierToken) => {
+    const userId = message.author.id ?? 0;
+    DiscordWikiBotLogger
+        .log(`${LOG_MESSAGES.USER_IDENTIFIER_ACCEPTED} ${userPeronalityIdentifierToken} for uid: ${userId}`);
+    message
+        .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_ACCEPTED);
 }
 
 const handleInvalidIDErrorCases = (r, message, userPeronalityIdentifierToken) => {
