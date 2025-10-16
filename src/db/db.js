@@ -7,6 +7,8 @@
 
 import { MongoClient } from "mongodb";
 import DB_CONFIG from './config.json' assert {type: 'json'};
+import DiscordWikiBotLogger from "../log/log.js";
+import { LOG_MESSAGES } from "../CONSTANTS.js";
 
 export default class DiscordWikiBotMongoDBClient {
 
@@ -33,9 +35,12 @@ export default class DiscordWikiBotMongoDBClient {
                     const users = db.collection(DB_CONFIG.COLLECTIONS.USERS);
                     const userTokenQuery = { uid: _userID2Query };
                     result = await users.findOne(userTokenQuery);
+                } catch {
+                    DiscordWikiBotLogger
+                        .log(LOG_MESSAGES.USER_REGISTRATION_DB_ERROR);
+                    reject(result);
                 } finally {
                     await this.client.close();
-
                     resolve(result);
                 }
             }

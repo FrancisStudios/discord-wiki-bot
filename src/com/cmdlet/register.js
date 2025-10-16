@@ -37,7 +37,8 @@ const RegisterCommand = (message) => {
 
                     } else handleInvalidIDErrorCases(r, message, userPeronalityIdentifierToken);
                 }
-            );
+            )
+            .catch((_rejection) => { });
 }
 
 const handleInvalidIDErrorCases = (r, message, userPeronalityIdentifierToken) => {

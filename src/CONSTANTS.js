@@ -9,7 +9,8 @@ const LOG_MESSAGES = {
     CLIENT_READY: '🟢 Discord Wiki Bot Client Ready',
     CMD_INVALID: '❌ An Invalid Command Has Been Received',
     USER_IDENTIFIER_INVALID: '❓Invalid User Identifier Was Inserted:',
-    USER_IDENTIFIER_ACCEPTED: '👤 User identifier accepted:'
+    USER_IDENTIFIER_ACCEPTED: '👤 User identifier accepted:',
+    USER_REGISTRATION_DB_ERROR: '💔 ERROR: Something is broken while trying to register new user! (db.js)'
 }
 
 const PREFIXES = {
