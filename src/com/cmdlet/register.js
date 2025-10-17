@@ -28,7 +28,7 @@ const RegisterCommand = (message) => {
             .then(
                 (r) => {
                     (r && r[IDENTIFIERS.DISCORD_ID] == '')
-                        ? handleValidIDNormalCase(r, message, userPeronalityIdentifierToken)
+                        ? handleValidIDNormalCase(r, message, userPeronalityIdentifierToken, DBClient)
                         : handleInvalidIDErrorCases(r, message, userPeronalityIdentifierToken);
                 }
             )
@@ -36,12 +36,16 @@ const RegisterCommand = (message) => {
 }
 
 /** Handle VALID and INVALID cases - so it is not so bloated in the ctrl flow */
-const handleValidIDNormalCase = (r, message, userPeronalityIdentifierToken) => {
+const handleValidIDNormalCase = (r, message, userPeronalityIdentifierToken, DBClient) => {
     const userId = message.author.id ?? 0;
-    DiscordWikiBotLogger
-        .log(`${LOG_MESSAGES.USER_IDENTIFIER_ACCEPTED} ${userPeronalityIdentifierToken} for uid: ${userId}`);
-    message
-        .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_ACCEPTED);
+    if (userId != 0) {
+        DBClient
+            .setUserAuthenticationToken(userPeronalityIdentifierToken, userId);
+        DiscordWikiBotLogger
+            .log(`${LOG_MESSAGES.USER_IDENTIFIER_ACCEPTED} ${userPeronalityIdentifierToken} for uid: ${userId}`);
+        message
+            .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_ACCEPTED);
+    }
 }
 
 const handleInvalidIDErrorCases = (r, message, userPeronalityIdentifierToken) => {
@@ -49,11 +53,8 @@ const handleInvalidIDErrorCases = (r, message, userPeronalityIdentifierToken) =>
         .log(`${LOG_MESSAGES.USER_IDENTIFIER_INVALID} ${userPeronalityIdentifierToken}`);
 
     if (r && r[IDENTIFIERS.DISCORD_ID] != '')
-        message
-            .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_IS_ALREADY_IN_USE)
-    else
-        message
-            .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_INVALID)
+        message.reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_IS_ALREADY_IN_USE);
+    else message.reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_INVALID);
 }
 
 export default RegisterCommand;

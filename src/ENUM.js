@@ -15,7 +15,7 @@ const SUPPORTED_ENCODINGS = {
 }
 
 const IDENTIFIERS = {
-    DISCORD_ID: 'discord-id'
+    DISCORD_ID: 'discord-uid'
 }
 
 const EXTENSIONS = {
