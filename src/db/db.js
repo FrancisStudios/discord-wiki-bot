@@ -76,15 +76,13 @@ export default class DiscordWikiBotMongoDBClient {
                             { uid: _localUID },
                             { $set: { [IDENTIFIERS.DISCORD_ID]: _discordUID } }
                         );
-
-                    DiscordWikiBotLogger
-                        .log(result);
                 } catch {
-                    DiscordWikiBotLogger
-                        .log('error occured');
                     reject(false);
                 } finally {
-                    await this.client.close();
+                    await this
+                        .client
+                        .close();
+                        
                     resolve(true);
                 }
             }

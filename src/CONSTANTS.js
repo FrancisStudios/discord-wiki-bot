@@ -10,7 +10,8 @@ const LOG_MESSAGES = {
     CMD_INVALID: '❌ An Invalid Command Has Been Received',
     USER_IDENTIFIER_INVALID: '❓Invalid User Identifier Was Inserted:',
     USER_IDENTIFIER_ACCEPTED: '👤 User identifier accepted:',
-    USER_REGISTRATION_DB_ERROR: '💔 ERROR: Something is broken while trying to register new user! (db.js)'
+    USER_REGISTRATION_DB_ERROR: '💔 ERROR: Something is broken while trying to register new user! (db.js)',
+    REGISTER_UPDATE_DB_ERROR: '💔 ERROR: Could not register new user - likely a database issue setUserAuthenticationToken() returned falsely'
 }
 
 const PREFIXES = {

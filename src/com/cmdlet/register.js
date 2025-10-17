@@ -36,15 +36,22 @@ const RegisterCommand = (message) => {
 }
 
 /** Handle VALID and INVALID cases - so it is not so bloated in the ctrl flow */
-const handleValidIDNormalCase = (r, message, userPeronalityIdentifierToken, DBClient) => {
+const handleValidIDNormalCase = async (r, message, userPeronalityIdentifierToken, DBClient) => {
     const userId = message.author.id ?? 0;
     if (userId != 0) {
-        DBClient
-            .setUserAuthenticationToken(userPeronalityIdentifierToken, userId);
-        DiscordWikiBotLogger
-            .log(`${LOG_MESSAGES.USER_IDENTIFIER_ACCEPTED} ${userPeronalityIdentifierToken} for uid: ${userId}`);
-        message
-            .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_ACCEPTED);
+
+        const isClientUpdateSuccessful = await DBClient
+            .setUserAuthenticationToken(userPeronalityIdentifierToken, userId)
+
+        if (isClientUpdateSuccessful) {
+            DiscordWikiBotLogger
+                .log(`${LOG_MESSAGES.USER_IDENTIFIER_ACCEPTED} ${userPeronalityIdentifierToken} for uid: ${userId}`);
+            message
+                .reply(GENERIC_RESPONSE_MESSAGES.IDENTIFIER_ACCEPTED);
+        } else {
+            DiscordWikiBotLogger
+                .log('smth went wrong')
+        }
     }
 }
 
