@@ -34,3 +34,9 @@ You have to register your Discord user for creating / editing documents because 
 You only need to **register once** per Discord account. So once you registered, you'll only need to register once more if you create a new Discord account - because you abandoned the old one. 
 
 ### ⌨️  List of Commands
+
+| Command   | Syntax                                | Description                                               |
+| --------- | ------------------------------------- | --------------------------------------------------------- |
+| ?register | `?register <identifier_code>`         | Associates your discord account with your actual likeness |
+| ?create   | `?create <document_title> <document>` | Creates a document in the database                        |
+|           |                                       |                                                           |
