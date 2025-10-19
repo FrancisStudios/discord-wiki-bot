@@ -5,6 +5,7 @@
  * ©2025 Francis Studios Softwares by L.
 */
 
+import createCommand from "./cmdlet/create.js";
 import HelloCommand from "./cmdlet/hello.js";
 import HelpCommand from "./cmdlet/help.js";
 import LSCommand from "./cmdlet/ls.js";
@@ -36,6 +37,11 @@ export default class DiscordWikiBotCommandRegistry {
     static register = {
         expression: (_keyword) => /^[?]register */.test(_keyword) ? _keyword : false,
         dispatch: (_messageRef) => { RegisterCommand(_messageRef) }
+    }
+
+    static create = {
+        expression: (_keyword) => /^[?]create */.test(_keyword) ? _keyword : false,
+        dispatch: (_messageRef) => { createCommand(_messageRef) }
     }
 
 }

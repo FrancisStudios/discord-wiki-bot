@@ -68,6 +68,12 @@ DiscordBotClient.on(DISCORD_EVENTS.MESSAGE_CREATE, (message) => {
                 .dispatch(message);
             break;
 
+        case DiscordWikiBotCommandRegistry.create.expression(message.content):
+            DiscordWikiBotCommandRegistry
+                .create
+                .dispatch(message);
+            break;
+
         default:
             if (/^[?][A-Za-z0-9] */.test(message.content)) {
                 message
